@@ -1,0 +1,10 @@
+<%= license_description('#') %>
+require_relative '../../spec_helper'
+
+describe '<%= cookbook_name %>::default' do
+  let(:chef_run) { ChefSpec::ServerRunner.converge(described_recipe) }
+
+  # it 'does something' do
+  #  expect(chef_run).to do_something
+  # end
+end
