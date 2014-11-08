@@ -1,6 +1,7 @@
 
 context = ChefDK::Generator.context
 cookbook_dir = File.join(context.cookbook_root, context.cookbook_name)
+test_cookbook_name = "#{context.cookbook_name}_test"
 
 # cookbook root dir
 directory cookbook_dir
@@ -14,7 +15,7 @@ directory "#{cookbook_dir}/files/default/test/" do
   action :create
   recursive true
 end
-directory "#{cookbook_dir}/test/cookbooks/#{cookbook_name}_test/recipes" do
+directory "#{cookbook_dir}/test/cookbooks/#{test_cookbook_name}/recipes" do
   action :create
   recursive true
 end
@@ -36,13 +37,13 @@ template "#{cookbook_dir}/files/default/test/minitest_helper.rb" do
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
 end
-template "#{cookbook_dir}/test/cookbooks/#{cookbook_name}_test/recipes/default.rb" do
+template "#{cookbook_dir}/test/cookbooks/#{test_cookbook_name}/recipes/default.rb" do
   source "default_recipe.rb.erb"
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
-  variables cookbook_name: "#{cookbook_name}_test"
+  variables cookbook_name: "#{test_cookbook_name}"
 end
-template "#{cookbook_dir}/test/cookbooks/#{cookbook_name}_test/metadata.rb" do
+template "#{cookbook_dir}/test/cookbooks/#{test_cookbook_name}/metadata.rb" do
   source "test_cookbook_metadata.rb.erb"
   helpers(ChefDK::Generator::TemplateHelper)
   action :create_if_missing
